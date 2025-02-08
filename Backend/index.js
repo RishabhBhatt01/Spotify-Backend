@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const User = require("./models/User")
 require("dotenv").config();
 const authRoutes = require("./routes/auth");
+const songRoutes = require("./routes/song");
+const playlistRoutes = require("./routes/playlist")
 const passport = require("passport");
 const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -39,19 +41,35 @@ connectDB();
 let opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.SECRET_KEY;
-passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findOne({id: jwt_payload.sub}, function(err, user) {
-        if (err) {
-            return done(err, false);
-        }
-        if (user) {
-            return done(null, user);
-        } else {
-            return done(null, false);
-            // or you could create a new account
-        }
-    });
+// passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+//     User.findOne({id: jwt_payload.sub}, function(err, user) {
+//         if (err) {
+//             return done(err, false);
+//         }
+//         if (user) {
+//             return done(null, user);
+//         } else {
+//             return done(null, false);
+//             // or you could create a new account
+//         }
+//     });
+// }));
+
+passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
+  try {
+      const user = await User.findOne({ id: jwt_payload.sub }).exec();
+      if (user) {
+          return done(null, user);
+      } else {
+          return done(null, false);
+      }
+  } catch (err) {
+      return done(err, false);
+  }
 }));
 
 
+
 app.use("/auth",authRoutes);
+app.use("/song",songRoutes);
+// app.use("/playlist",playlistRoutes);
