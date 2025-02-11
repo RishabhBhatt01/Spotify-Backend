@@ -1,19 +1,19 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {BrowserRouter,Routes,Route} from "react-router-dom";
+import LoginComponent from './routes/login';
 
-function App() {
-  const [jokes, setJokes] = useState([])
 
-  return (
-    <>
-      <p className="read-the-docs">
-        THE KING IS HERE
-      </p>
-      <p>Jokes : {jokes.length}</p>
-    </>
-  )
+
+function App(){
+  return <div className='w-screen h-screen'>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element = {<LoginComponent/>}/>
+      </Routes>
+    </BrowserRouter>
+  </div>
 }
+
 
 export default App
