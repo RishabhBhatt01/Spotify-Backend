@@ -1,8 +1,10 @@
 import { Icon } from "@iconify/react";
 import TextInput from "../components/shared/TextInput";
+import { Link } from "react-router-dom";
+
 const LoginComponent = () =>{
   return(
-    <div className="w-full h-full flex flex-col items-center">
+    <div className="w-full min-h-full flex flex-col items-center overflow-y-auto">
       <div className="logo p-5 border-b border-solid border-gray-450 w-full flex justify-center">
       <Icon icon="logos:spotify" width="217.61" height="68" /> 
       </div>
@@ -28,8 +30,13 @@ const LoginComponent = () =>{
         Don't have an account?
        </div>
        <div className="border border-gray-400 w-full flex items-center justify-center rounded-full py-4 text-gray-500 font-bold">
+        <Link to= "/signup">
         SIGN UP FOR SPOTIFY
+        </Link>
+        
        </div>
+
+
 
 
 
