@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@layer components{
+  .custom-font{ 
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    overflow: auto;
+
+    margin: 0;
+  }
+}
+
+.navbar{
+  color: rgb(161, 160, 160);
+  background-color: #0e0c0c;
+  opacity: 50;
+  height: 10%;
+}
+.content{
+  height:90%;
+  background-color: #131313;
+  color: white;
+}
