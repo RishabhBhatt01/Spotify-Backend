@@ -147,38 +147,37 @@ const Home = () => {
     );
 };
 
-const PlaylistView = ({titleText, cardsData}) => {
+
+// Playlist view acc. to chat gpt
+const PlaylistView = ({ titleText, cardsData }) => {
     return (
         <div className="text-white mt-8">
             <div className="text-2xl font-semibold mb-5">{titleText}</div>
             <div className="w-full flex justify-between space-x-4">
-                {
-                    // cardsData will be an array
-                    cardsData.map((item) => {
-                        return (
-                            <Card
-                                title={item.title}
-                                description={item.description}
-                                imgUrl={item.imgUrl}
-                            />
-                        );
-                    })
-                }
+                {cardsData.map((item, index) => (
+                    <Card
+                        key={index}  // Fix: Added unique key
+                        title={item.title}
+                        description={item.description}
+                        imgUrl={item.imgUrl}
+                    />
+                ))}
             </div>
         </div>
     );
 };
 
-const Card = ({title, description, imgUrl}) => {
+
+// Card acc. to chat gpt
+const Card = ({ title, description, imgUrl }) => {
     return (
         <div className="bg-black bg-opacity-40 w-1/5 p-4 rounded-lg">
             <div className="pb-4 pt-2">
-                <img className="w-full rounded-md" src={imgUrl} alt="label" />
+                <img className="w-full rounded-md" src={imgUrl} alt={title} />
             </div>
             <div className="text-white font-semibold py-3">{title}</div>
             <div className="text-gray-500 text-sm">{description}</div>
         </div>
     );
 };
-
 export default Home;
