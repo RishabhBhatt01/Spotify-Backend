@@ -21,6 +21,11 @@ const User = new mongoose.Schema({
     type : String,
     required : true
   },
+  password:{
+    type: String,
+    required : true,
+    private : true,
+  },
   likedSongs : {
     // will fill later
     type : String,
