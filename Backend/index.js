@@ -5,12 +5,15 @@ require("dotenv").config();
 const authRoutes = require("./routes/auth");
 const songRoutes = require("./routes/song");
 const playlistRoutes = require("./routes/playlist")
+const cors = require("cors");
 const passport = require("passport");
 const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
+
+app.use(cors());
 
 app.use(express.json());
 
