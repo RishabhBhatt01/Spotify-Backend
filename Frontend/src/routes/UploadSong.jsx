@@ -1,13 +1,18 @@
 import spotify_logo from '../assets/white_logo.svg';
 import IconText from '../components/shared/IconText';
 import '../App.css'
+import CloudinaryUpload from '../components/shared/CloudinaryUpload';
 
 import {Icon} from "@iconify/react";
 import NavbarText from "../components/shared/NavbarText";
 import { Navigate, useNavigate } from 'react-router-dom';
 import TextInput from '../components/shared/TextInput';
 
-const Home = () => {
+const UploadSongComponent = () => {
+console.log(window);
+console.log(window.cloudinary);
+
+
     const navigate = useNavigate();
     return (
         <div className="h-full w-full flex">
@@ -90,14 +95,6 @@ const Home = () => {
                 <div className="h-1/2 border-r border-white"></div>
             </div>
             <div className="w-1/3 flex justify-around h-full items-center">
-                {/* ✅ Fixed: Upload Song button is now clickable */}
-                <div 
-                    onClick={() => navigate("/uploadsongs")} 
-                    className="cursor-pointer"
-                >
-                    <NavbarText displayText="Upload Song" />
-                </div>
-
                 <div className="bg-white h-10 w-10 text-black flex items-center justify-center rounded-full font-semibold cursor-pointer">
                     RB
                 </div>
@@ -114,24 +111,24 @@ const Home = () => {
 
       </div>
 
-      <div className='2/3 flex space-x-4'>
+      <div className='w-2/3 flex space-x-4'>
 
-      <div className='w-1/2'>
-      <TextInput label= "Song Name" placeholder={"Enter Song Name"} />
-      </div>
+        <div className='w-1/2'>
+        <TextInput label= "Song Name" placeholder={"Enter Song Name"} />
+        </div>
 
 
-      <div className='w-1/2'>
-      <TextInput label= "Thumbnail" placeholder={"Thumbnail"} />
-      </div>
+        <div className='w-1/2'>
+        <TextInput label= "Thumbnail" placeholder={"Thumbnail"} />
+        </div>
 
-      </div>
+        </div>
 
 
       
-      
-      <TextInput placeholder={"Enter songs"} />
-
+      <div className='flex pl-81 pt-9'>
+      <CloudinaryUpload/>
+      </div>
 
 
 
@@ -142,4 +139,4 @@ const Home = () => {
         </div>
     );
 };
-export default Home;
+export default UploadSongComponent;
