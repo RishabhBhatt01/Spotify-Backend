@@ -4,6 +4,7 @@ const router = express.Router();
 const Song = require("../models/Song")
 const User = require("../models/User");
 
+// upload song.
 router.post("/create",passport.authenticate("jwt",{session : false}),
 async(req,res)=> {
   const {name,thumbnail,track}= req.body;
@@ -21,12 +22,17 @@ async(req,res)=> {
 
 });
 
-// Get route to get all songs I have published
-router.get("/get/mysongs", passport.authenticate("jwt",{session:false}),
-  async (req,res)=>{
-    // We need to get all songs where id == currentUser.id
-    const songs = await Song.find({artist: req.user._id});
-    return res.status(200).json({data:songs});
+
+// Get route to get all songs I have published. // Custom API for song
+router.get(
+  "/get/mysongs",
+  passport.authenticate("jwt", {session: false}),
+  async (req, res) => {
+      // We need to get all songs where artist id == currentUser._id
+      const songs = await Song.find({artist: req.user._id}).populate(
+          "artist"
+      );
+      return res.status(200).json({data: songs});
   }
 );
 
