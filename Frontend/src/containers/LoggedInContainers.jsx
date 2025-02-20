@@ -7,6 +7,7 @@ import NavbarText from "../components/shared/NavbarText";
 import { Navigate, useNavigate } from 'react-router-dom';
 import {Howl, Howler} from 'howler';
 import songContext from '../contexts/songContext';
+import { useEffect } from 'react';
 
 
 const LoggedInContainers  = ({children}) => {
@@ -16,10 +17,23 @@ const LoggedInContainers  = ({children}) => {
     const [isPaused, setIsPaused] = useState(true);
     const {currentSong,setCurrentSong} = useContext(songContext);
     console.log(currentSong);
+
+    useEffect(() => {
+        if(!currentSong){
+            return;
+        }
+        changeSong(currentSong.track);
+    },[currentSong])
     
 
+    const playSound = ()=>{
+        if(!soundPlayed) {
+            return;
+        }
+        soundPlayed.play();
+    }
 
-    const playSound = (songSrc) =>{
+    const changeSong = (songSrc) =>{
         if(soundPlayed){
           soundPlayed.stop();
         }
@@ -30,6 +44,7 @@ const LoggedInContainers  = ({children}) => {
      
       setSoundPlayed(sound);
       sound.play();
+      setIsPaused(false);
    }
 
    const pauseSound = () => {
@@ -66,20 +81,14 @@ const LoggedInContainers  = ({children}) => {
                         />
                     </div>
                     <div className="py-5">
-                        <div 
-                            onClick={() => {
-                                navigate("/home");
-                                
-                            }}
-                            className='pointer-cursor'
-                        >
+
                         <IconText
                             iconName={"material-symbols:home"}
                             displayText={"Home"}
                             active
+                            targetLink="/home"
                             
                         />
-                        </div>
                         <IconText
                             iconName={"material-symbols:search-rounded"}
                             displayText={"Search"}
@@ -88,17 +97,13 @@ const LoggedInContainers  = ({children}) => {
                             iconName={"icomoon-free:books"}
                             displayText={"Library"}
                         />
-                        <div 
-                        onClick={()=>{
-                            navigate("/mymusic");
-                        }}
-                        >
+             
                         <IconText
                         iconName={"mdi:account-music-outline"}
                         displayText={"My Music"}
+                        targetLink="/mymusic"
                         />
                         </div>
-                    </div>
                     <div className="pt-5">
                         <IconText
                             iconName={"material-symbols:add-box"}
