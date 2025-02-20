@@ -1,18 +1,3 @@
-// import {backendUrl} from "./config"
-// export const makeUnauthenticatedPOSTRequest = async (route,body) => {
-//   const response = await fetch(backendUrl +route,{
-//     method: "POST",
-//     headers : {
-//       "Content-Type" : "application/json",
-//     },
-//     body:JSON.stringify(body),
-//   });
-//   // here fetch is used to call api , its a function of javascript
-
-//   const formattedResponse = await response.json();
-//   return formattedResponse;
-// };
-
 import {backendUrl} from "./config";
 
 export const makeUnauthenticatedPOSTRequest = async (route, body) => {
@@ -41,23 +26,23 @@ export const makeAuthenticatedPOSTRequest = async (route, body) => {
     return formattedResponse;
 };
 
-// export const makeAuthenticatedGETRequest = async (route) => {
-//     const token = getToken();
-//     const response = await fetch(backendUrl + route, {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${token}`,
-//         },
-//     });
-//     const formattedResponse = await response.json();
-//     return formattedResponse;
-// };
+export const makeAuthenticatedGETRequest = async (route) => {
+    const token = getToken();
+    const response = await fetch(backendUrl + route, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    const formattedResponse = await response.json();
+    return formattedResponse;
+};
 
-// const getToken = () => {
-//     const accessToken = document.cookie.replace(
-//         /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
-//         "$1"
-//     );
-//     return accessToken;
-// };
+const getToken = () => {
+    const accessToken = document.cookie.replace(
+        /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
+        "$1"
+    );
+    return accessToken;
+};
