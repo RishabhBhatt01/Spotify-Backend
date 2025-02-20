@@ -8,6 +8,8 @@ import HomeComponent from "./routes/Home";
 import { useCookies } from 'react-cookie';
 import LoggedInHomeComponent from './routes/LoggedInHome';
 import UploadSongComponent from './routes/UploadSong';
+import MyMusicComponent from './routes/MyMusic';
+import songContext from './contexts/songContext';
 
 
 
@@ -15,26 +17,31 @@ import UploadSongComponent from './routes/UploadSong';
 function App(){
   const [cookie,setCookie] = useCookies(["token"]);
   cookie.token;
-
+  const [currentSong,setCurrentSong]=useState(null);
 
 
 
 
   return <div className='w-screen h-screen custom-font'>
-
-
     <BrowserRouter>
       {cookie.token ? ( // this means if cookie.token exists
-
-        // Logged in routes
+        <songContext.Provider value={{currentSong,setCurrentSong}}>
+        {/*  Logged in routes */}
       <Routes>
+        
         <Route path="/home" element = {<LoggedInHomeComponent/>}  />
         <Route path="/uploadsongs" element = {<UploadSongComponent/>}  />
+        <Route path="/mymusic" element = {<MyMusicComponent/>}  />
         <Route path='*' element={<Navigate to="/home" />}/>
-      </Routes>
+
+        
+      </Routes>                    
+      </songContext.Provider>
 
 ) : (
-  // Logged out
+
+  
+  // Logged out Routes only these three paths can be accessed if the user is not logged in..
       <Routes>
         <Route path="/login" element = {<LoginComponent/>} />
         <Route path='/signup' element= {<SignupComponent/>} />
