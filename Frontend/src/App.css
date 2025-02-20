@@ -33,3 +33,6 @@
   background-color: #121212;
   color: rgb(209, 208, 208);
 }
+.onhover:hover{
+  opacity: 0.5;
+}

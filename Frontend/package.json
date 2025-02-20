@@ -10,7 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.13.1",
+    "@cloudinary/url-gen": "^1.21.0",
     "@tailwindcss/vite": "^4.0.4",
+    "cloudinary": "^2.5.1",
+    "cloudinary-core": "^2.13.1",
+    "howler": "^2.2.4",
     "react": "^19.0.0",
     "react-cookie": "^7.2.2",
     "react-dom": "^19.0.0",
